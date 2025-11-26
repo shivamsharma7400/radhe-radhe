@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Radha Radhe</title>
+<style>
+    body {
+        margin: 0;
+        background: #000;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        font-family: Arial, sans-serif;
+        overflow: hidden;
+        color: #fff;
+    }
+
+    /* Counter Box */
+    #counterBox {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        width: 90px;
+        height: 90px;
+        background: rgba(255,255,255,0.1);
+        border-radius: 12px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 22px;
+        font-weight: bold;
+        border: 2px solid #555;
+        box-shadow: 0 0 10px rgba(255,255,255,0.3);
+    }
+
+    /* Bigger Horizontal Container */
+    .container {
+        width: 95%;
+        max-width: 900px;
+        height: 70vh;
+        border: 2px solid #444;
+        border-radius: 12px;
+        position: relative;
+        overflow: hidden;
+        background: rgba(255,255,255,0.05);
+        box-shadow: 0 0 20px rgba(255,255,255,0.2);
+        margin-top: 60px;
+        scroll-behavior: smooth;
+    }
+
+    /* Button with positive impact */
+    button {
+        margin-top: 20px;
+        padding: 12px 25px;
+        background: #ff0095;
+        border: none;
+        color: #fff;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 18px;
+        font-weight: bold;
+        box-shadow: 0 0 10px #ff0095;
+        transition: 0.3s;
+    }
+
+    button:active {
+        transform: scale(1.15);
+        box-shadow: 0 0 25px #ff00c8;
+    }
+
+    /* Falling Radha */
+    .falling-text {
+        position: absolute;
+        top: -30px;
+        font-size: 20px;
+        font-weight: bold;
+        color: #fff;
+        letter-spacing: 1px;
+        animation: fall 1.2s linear forwards;
+    }
+
+    @keyframes fall {
+        from { transform: translateY(0); }
+        to { transform: translateY(65vh); }
+    }
+</style>
+</head>
+<body>
+
+<div id="counterBox"><span id="count">0</span></div>
+
+<div class="container" id="box"></div>
+
+<button onclick="dropText()">Click Me</button>
+
+<!-- Radha Pronunciation Audio -->
+<!-- Radha Mantra Audio -->
+<!-- Working Radha Mantra Audio -->
+<!-- Guaranteed working placeholder chant-like audio -->
+
+
+<script>
+let clickCount = 0;
+
+function dropText() {
+    clickCount++;
+    document.getElementById("count").innerText = clickCount;
+
+    // Speak "राधा" using browser TTS
+    const msg = new SpeechSynthesisUtterance('राधे राधे');
+    msg.lang = 'hi-IN';
+    msg.rate = 0.8;
+    speechSynthesis.speak(msg);
+
+    const box = document.getElementById('box');
+
+    const txt = document.createElement('div');
+    txt.className = 'falling-text';
+    txt.innerText = 'राधे राधे';
+
+    const maxX = box.clientWidth - 50;
+    const randomX = Math.floor(Math.random() * maxX);
+    txt.style.left = randomX + 'px';
+
+    box.appendChild(txt);
+
+    setTimeout(() => {
+        txt.remove();
+    }, 1500);
+}
+</script>
+
+</body>
+</html>
